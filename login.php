@@ -1,23 +1,26 @@
 <?php
 session_start();
-if(isset($_POST["Username"]) && isset($_POST["Password"])){
-    $username=$_POST["Username"];
-    $password=$_POST["Password"];
-
-    if($Username == "usm" && $password=="123"){
-        $_SESSION["Username"]="usm";
-        header("Location:dashboard.php");
+if (isset($_POST['username']) && isset($_POST['password'])) {
+    // User is already logged in, redirect to welcome page  
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    if ($username == "usm" && $password == "123") {
+        // Set session variable
+        $_SESSION['username'] = $username;
+        header("Location: dashboard.php");
     }
 }
 ?>
 <html>
     <head>
-        <title> Halaman Login </title>
+        <title>::Login Page::</title>
         <style type="text/css">
             body{
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                height: 100vh;
+                background-size: cover;
                 background-image: url("https://cdn.arstechnica.net/wp-content/uploads/2023/06/bliss-update-1440x960.jpg");
             }
             table{
@@ -38,14 +41,14 @@ if(isset($_POST["Username"]) && isset($_POST["Password"])){
         </style>
     </head>
     <body>
-     <form method="post" action="login.php">
+        <form action="login.php" method="post">
          <table>
             <tr>
                 <td colspan="2" style="text-align: center;" >LOGIN</td>
             </tr>
             <tr>
                 <td>Username</td>
-                <td><input type="username" name="username" /></td>
+                <td><input type="text" name="username" /></td>
             </tr>
             <tr>
                 <td>Password</td>
