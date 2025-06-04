@@ -12,6 +12,18 @@ if (!isset($_SESSION['counter'])) {
 } else {
     $_SESSION['counter'] += 1;
 }
+
+    if(isset($_SESSION["daftar"])){
+    $_SESSION["daftar"] = [];
+}
+if(isset($_POST["nama"]) && isset ($_POST["umur"])){
+    $daftar = [
+        'nama' =>$_POST["nama"],
+        'umur' =>$_POST["umur"],
+    ];
+    $_SESSION["daftar"] [] = $daftar;
+}
+
 ?>
 <html>
     <head>
@@ -42,14 +54,14 @@ if (!isset($_SESSION['counter'])) {
                 border-radius: 5px;
             }
 
-            button #logout{
+            #logout{
                 background-color: red;
             }
         </style>
     </head>
     <body>
         <h1><?php echo "Selamat datang " . $_SESSION['username'] . " Ke-" . $_SESSION["counter"] ?></h1>
-        <form method="post" action="login.php">
+        <form method="post" action="dashboard.php">
          <table>
             <tr>
                 <td colspan="2" style="text-align: center;" >DAFTAR</td>
@@ -65,9 +77,23 @@ if (!isset($_SESSION['counter'])) {
             <tr>
                 <td colspan="2" style="text-align: center;">
                     <button type="submit" >PROSES</button>
-                    <button id="logout" type="button" >LOGOUT</button>
+                    <a href="logout.php">
+                        <button id="logout" type="button" >LOGOUT</button>
+                    </a>
                 </td>
             </tr>
+        </table>
+        <table border="1">
+            <tr>
+                <td>NAMA</td>
+                <td>UMUR</td>
+            </tr>
+            <?php foreach($_SESSION["daftar"]as $daftar):?>
+            <tr>
+                <td><?php echo $daftar ["nama"];?> </td>
+                <td><?php echo $daftar["umur"];?> </td>
+            </tr>
+            <?php endforeach;?>
         </table>
         </form>
     </body>
